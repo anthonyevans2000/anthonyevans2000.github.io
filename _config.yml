@@ -1,0 +1,10 @@
+# Site settings
+title: liquant 
+email: blog@liquant.com
+description: > # this means to ignore newlines until "baseurl:"
+  Thoughts, rhetoric, ramblings and projects of an Australian electrical engineer.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://liquant.com" # the base hostname & protocol for your site
+github_username:  anthonyevans2000
+# Build settings
+markdown: kramdown
