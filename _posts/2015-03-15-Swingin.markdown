@@ -1,0 +1,29 @@
+---
+layout: post
+title:  "Tubein"
+date:   2015-03-15 14:45:51
+categories: git wireshark rambling server
+---
+
+I've been getting into gear with the RaspPi server. It took me a little while to figure out that my server _was_ in fact working to the outside world.
+I set up port forwarding on HTTP and SSH within my router, which redirects incoming requests for connections to those ports to my server, rather than just getting ignoring them as is default. I also needed to disable iiNet's packet filter, which also ignores incoming requests on standard HTTP and SSH ports by default. 
+After fixing those issues, I was still not able to hit this website or initiate SSH to the pi, when trying to use my global IP address instead of my internal. This stumped me a bit. I could ping my ip address fine, but I couldn't figure out how to check exactly where my packets were slamming into an invisible cyber wall.
+
+After some confused googling, which generally proved unhelpful, as I didn't have much more to go on than 'Debugging web page connection' or 'ssh through internet to router on the same network' - I had the idea of using sites like [downforeveryoneorjustme][everyone] to double check whether I could connect. I was mystified when the site claimed that my site was up.
+I then used [this great tool][port], which allows you to scan a single specific port on an IP of your choosing. So I basically checked port 80- open, checked 81, closed. Hrm.
+
+I then turned wifi off on my phone and used its browser to hit my IP address. Bingo, the page loaded.
+
+-whew-
+
+I then had the idea of using [wireshark][ws] to track where the packets were going inside my system. Using this tool earlier would have lead me to a faster resolution, as it allowed me to see that requests to my global IP address were in fact reaching my server- but my servers responses were not making it back to the devices making the HTTP or SSH requests. I'm still unsure as to exactly why this is- but regardless, I know that I can hit this blog and my pi from the outside world!
+
+Now I've made a [git repo][gr] for the site, for some tension relieving cloud backup and source control for when I begin fiddling with some of the CSS settings for the site!
+
+I'm interested in getting a latex plugin installed for the site as well so that I can write some lovely integral symbols and begin pecking at developing a thought-map about what I'd like to aim towards with my work and our simulation environment / control methodology. 
+
+
+[everyone]: http://www.downforeveryoneorjustme.com/ 
+[port]: http://www.portchecktool.com/
+[ws]: https://www.wireshark.org/
+[gr]: https://github.com/anthonyevans2000/liquant
