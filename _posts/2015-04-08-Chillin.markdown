@@ -1,29 +1,33 @@
 ---
 layout: post
-title:  "Tubein"
-date:   2015-03-15 14:45:51
-categories: git wireshark rambling server
+title:  "Chillin"
+date:   2015-04-29 22:57:51
+categories: git rambling laptop VNC ipad
 ---
 
-I've been getting into gear with the RaspPi server. It took me a little while to figure out that my server _was_ in fact working to the outside world.
-I set up port forwarding on HTTP and SSH within my router, which redirects incoming requests for connections to those ports to my server, rather than just getting ignoring them as is default. I also needed to disable iiNet's packet filter, which also ignores incoming requests on standard HTTP and SSH ports by default. 
-After fixing those issues, I was still not able to hit this website or initiate SSH to the pi, when trying to use my global IP address instead of my internal. This stumped me a bit. I could ping my ip address fine, but I couldn't figure out how to check exactly where my packets were slamming into an invisible cyber wall.
+I've moved my site over to something even less power hungry and even more hacker friendly- my git repo!
+It serves my site without me having to worry about dynamic DNS and trying to set up a python script such that my little Pi would update GoDaddy with it's new IP address every now and then. phew.
 
-After some confused googling, which generally proved unhelpful, as I didn't have much more to go on than 'Debugging web page connection' or 'ssh through internet to router on the same network' - I had the idea of using sites like [downforeveryoneorjustme][everyone] to double check whether I could connect. I was mystified when the site claimed that my site was up.
-I then used [this great tool][port], which allows you to scan a single specific port on an IP of your choosing. So I basically checked port 80- open, checked 81, closed. Hrm.
+This setup also has the side benefit of enabling me to simply write posts from any computer and commit them to my git repo. A little more flexible than shelling into my Pi, I think.
+I'll try to set it up as a wireless TV box instead. ;)
 
-I then turned wifi off on my phone and used its browser to hit my IP address. Bingo, the page loaded.
+I've been doing some of the tutorials at [Team Treehouse][th], which have got me excited to apply some of the CSS skills they've taught me. I highly recommend checking them out. They've got a two week trial and it really showcases how excellent education is going to be in a few years.
 
--whew-
+The idea of doing some design has also got me setting up a VNC client on my iPad, so that I can use a stylus to draw things in GIMP. It wasn't too hard to do- I had it basically set up but for the fact that my Laptop's firewall was blocking access attempts from the Pad. one quick 'sudo ufw disable' got it working.
 
-I then had the idea of using [wireshark][ws] to track where the packets were going inside my system. Using this tool earlier would have lead me to a faster resolution, as it allowed me to see that requests to my global IP address were in fact reaching my server- but my servers responses were not making it back to the devices making the HTTP or SSH requests. I'm still unsure as to exactly why this is- but regardless, I know that I can hit this blog and my pi from the outside world!
+However, I quickly earned from here that the Vino VNC server, isn't all that flash hot and kept crashing.
+I just installed vnc4server and then started with
 
-Now I've made a [git repo][gr] for the site, for some tension relieving cloud backup and source control for when I begin fiddling with some of the CSS settings for the site!
+{% highlight bash%}
+x11vnc -storepasswd
+{% endhighlight%}
 
-I'm interested in getting a latex plugin installed for the site as well so that I can write some lovely integral symbols and begin pecking at developing a thought-map about what I'd like to aim towards with my work and our simulation environment / control methodology. 
+to create my VNC password, then
+{% highlight bash %}
+x11vnc -auth guess -forever -loop -noxdamage -repeat -rfbauth /home/anthony/.vnc/passwd -rfbport 5900 -shared
+{% endhighlight %}
+to start the VNC server. Worked like a charm after that!
 
+Now I need to practice with gimp and start trying to draw a cool logo! =D
 
-[everyone]: http://www.downforeveryoneorjustme.com/ 
-[port]: http://www.portchecktool.com/
-[ws]: https://www.wireshark.org/
-[gr]: https://github.com/anthonyevans2000/liquant
+[th]: http://www.teamtreehouse.com/
